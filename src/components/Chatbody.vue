@@ -3,7 +3,7 @@
     <div class="chat-body" ref="scrollList">
         <div class="chat-wrap">
             <div class="columns" v-for="message in messages" :key="message.id">
-                <div class="column is-2">
+                <div class="column is-2 mr-2">
                     <!-- <img src="#" alt="profile"> -->
                     <div class="circle">{{ message.img }}</div>
                 </div>
@@ -48,8 +48,8 @@ import { ref, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { db } from '@/firebase'
 import { collection, onSnapshot, 
-addDoc, deleteDoc, doc, 
-updateDoc, query, orderBy, limit } from "firebase/firestore"; 
+    addDoc, deleteDoc, doc, updateDoc, 
+    query, orderBy, limit } from "firebase/firestore"; 
 
 const todoCollectionRefs = collection(db, "chat")
 const todoCollectionQuery = query(todoCollectionRefs, orderBy("date", 'desc'), limit(25));
@@ -100,7 +100,6 @@ export default {
                 });
 
                 messages.value = fbChat
-                scrollDown()
             });
             
         })
@@ -121,9 +120,8 @@ export default {
                 content: this.messageContext,
                 img: this.store.state.icon
             });
-            // this.messages.push(message)
+
             this.messageContext = ""
-            this.scrollDown();
         },
         scrollDown() {
             //scrolled done once everything done rendering
@@ -145,12 +143,17 @@ export default {
 </script>
 
 <style>
+
+
+
     .chat-body{
-        max-width: 400px;
+        max-width: 500px;
+        /* max-width: 80vw; */
         margin: 0 auto;
         padding: 20px;
         overflow: scroll;
         height: 100vh;
+        overflow-x:hidden ;
     }
 
     .chat-wrap{
@@ -173,10 +176,15 @@ export default {
     }
 
     .circle{
+        font-size: 1.5em;
         width: 60px;
         height: 60px;
-        border-radius: 50%;
-        background: aliceblue;
+        /* border-radius: 50%; */
+        border-radius: 10px;
+        /* box-shadow: 2px 2px black; */
+        /* background: aliceblue; */
+        background: rgb(98, 139, 226);
+        background: linear-gradient(166deg, rgba(98, 139, 226, 1) 8%, rgba(70, 224, 255, 1) 91%);
         display: flex;
         justify-content: center;
         align-items: center;
