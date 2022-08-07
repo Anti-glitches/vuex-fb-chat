@@ -50,6 +50,7 @@ import { db } from '@/firebase'
 import { collection, onSnapshot, 
     addDoc, deleteDoc, doc, updateDoc, 
     query, orderBy, limit } from "firebase/firestore"; 
+import moment from 'moment'
 
 const todoCollectionRefs = collection(db, "chat")
 const todoCollectionQuery = query(todoCollectionRefs, orderBy("date", 'desc'), limit(25));
@@ -116,7 +117,7 @@ export default {
         handleClick() {
             addDoc(todoCollectionRefs, {
                 name: this.store.state.name,
-                date: Date.now(),
+                date: moment(Date.now()).format('MMM Do, h:mma'),
                 content: this.messageContext,
                 img: this.store.state.icon
             });
@@ -147,7 +148,7 @@ export default {
 
 
     .chat-body{
-        max-width: 500px;
+        max-width: 400px;
         /* max-width: 80vw; */
         margin: 0 auto;
         padding: 20px;
