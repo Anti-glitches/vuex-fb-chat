@@ -117,7 +117,7 @@ export default {
         handleClick() {
             addDoc(todoCollectionRefs, {
                 name: this.store.state.name,
-                date: moment(Date.now()).format('MMM Do, h:mma'),
+                date: moment(Date.now()).format('MMM Do, h:mm:ssa'),
                 content: this.messageContext,
                 img: this.store.state.icon
             });
